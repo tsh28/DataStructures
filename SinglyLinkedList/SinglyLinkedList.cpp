@@ -41,7 +41,23 @@ public:
     }; 
 
     void insertAt(int val, int index){
-
+        if (index == 0) {
+            insertFront(val); 
+            return; 
+        }
+        if (index == -1) {
+            insertBack(val); 
+            return; 
+        }
+        Node* tmp = head; 
+        Node* newNode = new Node(val);
+        while (--index > 0) {
+            tmp = head->next; 
+        }
+        Node* tpm_next = tmp->next; 
+        tmp->next = newNode; 
+        newNode->next = tpm_next; 
+        return; 
     }; 
 
     void removeFront(){
@@ -77,7 +93,7 @@ int main() {
     SLL.insertFront(1);
     SLL.insertBack(3);  
     // SLL.insertBack(2); 
-    // SLL.insertAt(5,1); 
+    SLL.insertAt(5,1); 
     SLL.show(); 
     return 0; 
 }
