@@ -61,15 +61,47 @@ public:
     }; 
 
     void removeFront(){
-
+        Node* tmp = head; 
+        if (isEmpty()){
+            return; 
+        }
+        head = head->next; 
     }; 
 
     void removeBack(){
-
+        if (isEmpty()){
+            return; 
+        }
+        if (!head->next){
+            head = nullptr; 
+            return; 
+        }
+        Node* current = head; 
+        while (current->next->next){
+            current = current->next; 
+        }
+        current->next = nullptr; 
+        return; 
     }; 
 
     void removeAt(int index){
+        if (index == 0) {
+            removeFront(); 
+            return; 
+        }
+        if (index == -1) {
+            removeBack(); 
+            return; 
+        }
 
+        Node* current = head; 
+        while (--index){
+            current = current->next; 
+        }
+        Node* current_next = current->next; 
+        current->next = current->next->next; 
+        delete current_next; 
+        return; 
     }; 
     void show(){
         if (isEmpty()){
@@ -92,8 +124,13 @@ int main() {
     SinglyLinkedList SLL; 
     SLL.insertFront(1);
     SLL.insertBack(3);  
-    // SLL.insertBack(2); 
-    SLL.insertAt(5,1); 
+    SLL.insertAt(10,1);
+    SLL.insertAt(20,2); 
+    cout << "After insert: "; 
+    SLL.show(); 
+    SLL.removeFront(); 
+    // SLL.removeBack(); 
+    SLL.removeAt(1); 
     SLL.show(); 
     return 0; 
 }
